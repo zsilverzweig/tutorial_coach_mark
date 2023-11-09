@@ -21,6 +21,7 @@ class AnimatedFocusLight extends StatefulWidget {
   final Function()? finish;
   final double paddingFocus;
   final Color colorShadow;
+  final bool customOverlay;
   final double opacityShadow;
   final Duration? focusAnimationDuration;
   final Duration? unFocusAnimationDuration;
@@ -39,6 +40,7 @@ class AnimatedFocusLight extends StatefulWidget {
     this.clickTarget,
     this.clickTargetWithTapPosition,
     this.clickOverlay,
+    this.customOverlay = false,
     this.paddingFocus = 10,
     this.colorShadow = Colors.black,
     this.opacityShadow = 0.8,
