@@ -19,6 +19,25 @@ class CustomTargetContentPosition {
   }
 }
 
+class OverlayMarker extends InheritedWidget {
+  const OverlayMarker({
+    Key? key,
+    required Widget child,
+    required this.markerContext,
+  }) : super(key: key, child: child);
+
+  final BuildContext markerContext;
+
+  static OverlayMarker? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<OverlayMarker>();
+  }
+
+  @override
+  bool updateShouldNotify(OverlayMarker oldWidget) {
+    return markerContext != oldWidget.markerContext;
+  }
+}
+
 enum ContentAlign { top, bottom, left, right, custom }
 
 typedef TargetContentBuilder = Widget Function(

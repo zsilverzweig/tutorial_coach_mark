@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:tutorial_coach_mark/src/target/target_focus.dart';
-import 'package:tutorial_coach_mark/src/target/target_position.dart';
+
+import '../tutorial_coach_mark.dart';
 
 // ignore: constant_identifier_names
 enum ShapeLightFocus { Circle, RRect }
@@ -80,29 +80,10 @@ void postFrame(VoidCallback callback) {
   Future.delayed(Duration.zero, callback);
 }
 
-extension NullableExt<T> on T? {git
+extension NullableExt<T> on T? {
   void let(Function(T it) callback) {
     if (this != null) {
       callback(this as T);
     }
-  }
-}
-
-class OverlayMarker extends InheritedWidget {
-  const OverlayMarker({
-    Key? key,
-    required Widget child,
-    required this.markerContext,
-  }) : super(key: key, child: child);
-
-  final BuildContext markerContext;
-
-  static OverlayMarker? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<OverlayMarker>();
-  }
-
-  @override
-  bool updateShouldNotify(OverlayMarker oldWidget) {
-    return markerContext != oldWidget.markerContext;
   }
 }
