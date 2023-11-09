@@ -16,6 +16,7 @@ class TargetFocus {
     this.enableOverlayTab = false,
     this.enableTargetTab = true,
     this.alignSkip,
+    this.customOverlay = false,
     this.paddingFocus,
     this.focusAnimationDuration,
     this.unFocusAnimationDuration,
@@ -29,6 +30,7 @@ class TargetFocus {
   final ShapeLightFocus? shape;
   final double? radius;
   final BorderSide? borderSide;
+  final bool customOverlay;
   final bool enableOverlayTab;
   final bool enableTargetTab;
   final Color? color;

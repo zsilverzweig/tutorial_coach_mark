@@ -135,6 +135,7 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget>
       target = getTargetCurrent(
         currentTarget!,
         rootOverlay: widget.rootOverlay,
+        customOverlay: currentTarget!.customOverlay,
       );
     } on NotFoundTargetException catch (e, s) {
       debugPrint(e.toString());

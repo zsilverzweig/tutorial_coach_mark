@@ -8,6 +8,7 @@ enum ShapeLightFocus { Circle, RRect }
 TargetPosition? getTargetCurrent(
   TargetFocus target, {
   bool rootOverlay = false,
+  bool customOverlay = false,
 }) {
   if (target.keyTarget != null) {
     var key = target.keyTarget!;
@@ -27,6 +28,15 @@ TargetPosition? getTargetCurrent(
             .findAncestorStateOfType<NavigatorState>()
             ?.context;
       }
+
+      if (customOverlay) {
+        final OverlayMarker? markerWidget =
+            OverlayMarker.of(key.currentContext!);
+        if (markerWidget != null) {
+          context = markerWidget.markerContext;
+        }
+      }
+
       Offset offset;
       if (context != null) {
         offset = renderBoxRed.localToGlobal(
@@ -75,5 +85,24 @@ extension NullableExt<T> on T? {
     if (this != null) {
       callback(this as T);
     }
+  }
+}
+
+class OverlayMarker extends InheritedWidget {
+  const OverlayMarker({
+    Key? key,
+    required Widget child,
+    required this.markerContext,
+  }) : super(key: key, child: child);
+
+  final BuildContext markerContext;
+
+  static OverlayMarker? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<OverlayMarker>();
+  }
+
+  @override
+  bool updateShouldNotify(OverlayMarker oldWidget) {
+    return markerContext != oldWidget.markerContext;
   }
 }

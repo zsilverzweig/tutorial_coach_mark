@@ -134,6 +134,7 @@ abstract class AnimatedFocusLightState extends State<AnimatedFocusLight>
       targetPosition = getTargetCurrent(
         _targetFocus,
         rootOverlay: widget.rootOverlay,
+        customOverlay: _targetFocus.customOverlay,
       );
     } on NotFoundTargetException catch (e, s) {
       debugPrint(e.toString());
