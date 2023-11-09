@@ -93,8 +93,24 @@ class TutorialCoachMark {
     );
   }
 
-  void show({required BuildContext context, bool rootOverlay = false}) {
-    OverlayState? overlay = Overlay.of(context, rootOverlay: rootOverlay);
+  void show({
+    required BuildContext context,
+    bool rootOverlay = false,
+    bool customOverlay = false,
+  }) {
+    OverlayState? overlay;
+
+    if (customOverlay) {
+      // Get the context from the closest OverlayMarker if using customOverlay
+      final OverlayMarker? overlayMarker = OverlayMarker.of(context);
+      overlay = overlayMarker != null
+          ? Overlay.of(overlayMarker.markerContext, rootOverlay: rootOverlay)
+          : null;
+    } else {
+      // Get the OverlayState using the provided context as before
+      overlay = Overlay.of(context, rootOverlay: rootOverlay);
+    }
+
     overlay.let((it) {
       showWithOverlayState(overlay: it, rootOverlay: rootOverlay);
     });
